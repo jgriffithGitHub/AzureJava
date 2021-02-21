@@ -31,7 +31,7 @@ jobs:
     - name: 'Restore Project Dependencies Using Mvn'
       shell: bash
       run: |
-        pushd './${{ env.POM_XML_DIRECTORY }}'
+        pushd '${{ env.POM_XML_DIRECTORY }}'
         mvn clean package
         popd
     - name: 'Run Azure Functions Action'

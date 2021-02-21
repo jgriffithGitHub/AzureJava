@@ -12,7 +12,7 @@ on:
 # 2. Change these variables for your configuration:
 env:
   AZURE_FUNCTIONAPP_NAME: AzureJavaDemoFunction      # set this to your function app name on Azure
-  POM_XML_DIRECTORY: '/usr/jgriffith/AzureFunction/myFirstAzureFunction'                     # set this to the directory which contains pom.xml file
+  POM_XML_DIRECTORY: 'myFirstAzureFunction'                     # set this to the directory which contains pom.xml file
   POM_FUNCTIONAPP_NAME: myFirstAzureFunction        # set this to the function app name in your local development environment
   JAVA_VERSION: '1.8.x'                      # set this to the dotnet version to use
 
@@ -31,7 +31,7 @@ jobs:
     - name: 'Restore Project Dependencies Using Mvn'
       shell: bash
       run: |
-        pushd './${{ env.POM_XML_DIRECTORY }}'
+        pushd '${{ env.POM_XML_DIRECTORY }}'
         mvn clean package
         popd
     - name: 'Run Azure Functions Action'
@@ -39,7 +39,7 @@ jobs:
       id: fa
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-        package: './${{ env.POM_XML_DIRECTORY }}/target/azure-functions/${{ env.POM_FUNCTIONAPP_NAME }}'
+        package: '${{ env.POM_XML_DIRECTORY }}/target/azure-functions/${{ env.POM_FUNCTIONAPP_NAME }}'
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
 
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
